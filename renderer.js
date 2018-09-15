@@ -3,18 +3,19 @@
 // All of the Node.js APIs are available in this process.
 M.AutoInit();
 
-var remote = require('electron').remote;
+let remote = require('electron').remote;
 remote.getGlobal('ipdUser').username = "sesh";
 
-var socket = io('http://localhost');
+let socket = io('http://localhost');
 
-function logon() {
-    socket = io(document.getElementById('registry').value);
-    console.log(remote.getGlobal('ipdUser').username);
-    socket.emit('login', {
-        username: document.getElementById('username').value,
-        password: document.getElementById('password').value
-    }, function (data) {
+function recreateSocket (ip) {
+    socket.disconnect();
+    socket = io(ip);
+    socket.on('connection', function(data) {
+        console.log("connected");
+    });
+    socket.on('login', function (data) {
+        console.log("Recieved: " + data);
         if (data) {
             M.toast({html: 'Successfully logged in!'});
             remote.getGlobal('ipdUser').username = document.getElementById('username').value;
@@ -25,12 +26,32 @@ function logon() {
         } else {
             M.toast({html: 'Invalid username/password.', classes: 'red'});
         }
+    });
+    socket.on('register', function (data) {
+        M.toast({html: 'Successfully registered!'});
+    })
+}
+
+function logon() {
+    recreateSocket(document.getElementById('registry').value);
+    console.log(remote.getGlobal('ipdUser').username);
+    socket.emit('login', {
+        username: document.getElementById('username').value,
+        password: document.getElementById('password').value
+    })
+}
+
+function register() { // no checks for duplicate usernames
+    recreateSocket(document.getElementById('registry').value);
+    socket.emit('register', {
+        username: document.getElementById('username').value,
+        password: document.getElementById('password').value
     })
 }
 
 /* QEMU VM */
 
-const { spawn } = require('child_process');
+const {spawn} = require('child_process');
 var vm;
 
 function startVM(image) { //sudo qemu-system-x86_64 -enable-kvm -m 4G -vga qxl -hda ubuntu.qcow2 -smp 4 -cpu host

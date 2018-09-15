@@ -53,7 +53,7 @@
         <div class="card-action">
           <a class="waves-effect waves-light btn" onclick="logon()">
             <i class="material-icons left">cloud</i>Logon</a>
-          <a class="waves-effect waves-light btn" href="register.html">
+          <a class="waves-effect waves-light btn" onclick="register()">
             <i class="material-icons left">cloud</i>Register</a>
         </div>
       </div>
@@ -73,20 +73,6 @@
   <script type="text/javascript" src="materialize/js/materialize.min.js"></script>
   <script type="text/javascript" src="node_modules/socket.io-client/dist/socket.io.js"></script>
   <script type="text/javascript" src="renderer.js"></script>
-  <script>
-    // You can also require other files to run in this process
-    //require('./renderer.js');
-    var socket = io('http://localhost');
-    socket.on('connect', function () {
-
-    });
-    socket.on('event', function (data) {
-
-    });
-    socket.on('disconnect', function () {
-
-    });
-  </script>
 </body>
 
 </html>
