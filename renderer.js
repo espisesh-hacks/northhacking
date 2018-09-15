@@ -14,15 +14,17 @@ function recreateSocket (ip) {
     socket.on('connection', function(data) {
         console.log("connected");
     });
+    socket.on('vmlist', function (data) {
+        remote.getGlobal('vms').object = data;
+        window.location.href = "dashboard.html";
+    });
     socket.on('login', function (data) {
         console.log("Recieved: " + data);
         if (data) {
             M.toast({html: 'Successfully logged in!'});
             remote.getGlobal('ipdUser').username = document.getElementById('username').value;
             remote.getGlobal('ipdUser').password = document.getElementById('password').value;
-            socket.emit('vmlist', remote.getGlobal('ipdUser'), function (data) {
-                remote.getGlobal('vms').object = data;
-            });
+            socket.emit('vmlist', remote.getGlobal('ipdUser'));
         } else {
             M.toast({html: 'Invalid username/password.', classes: 'red'});
         }

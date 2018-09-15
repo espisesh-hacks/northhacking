@@ -1,12 +1,12 @@
 {
-  "name": "electron-quick-start",
+  "name": "IPD",
   "version": "1.0.0",
-  "description": "A minimal Electron application",
+  "description": "Inter planetary desktops!",
   "main": "main.js",
   "scripts": {
-    "start": "electron ."
+    "start": "electron . --disable-gpu"
   },
-  "repository": "https://github.com/electron/electron-quick-start",
+  "repository": "https://github.com/espisesh-hacks/northhacking",
   "keywords": [
     "Electron",
     "quick",
@@ -14,7 +14,7 @@
     "tutorial",
     "demo"
   ],
-  "author": "GitHub",
+  "author": "WHEE",
   "license": "CC0-1.0",
   "devDependencies": {
     "electron": "^2.0.0"

@@ -2,77 +2,91 @@
 <html>
 
 <head>
-  <!--Import Google Icon Font-->
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <!--Import materialize.css-->
-  <link type="text/css" rel="stylesheet" href="materialize/css/materialize.min.css" media="screen,projection" />
-  <style>
-    body {
-      background-image: url("img/bg.jpg");
-    }
-  </style>
-  <!--Let browser know website is optimized for mobile-->
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="materialize/css/materialize.min.css" media="screen,projection"/>
+    <style>
+        :not(input):not(textarea),
+        :not(input):not(textarea)::after,
+        :not(input):not(textarea)::before {
+            -webkit-user-select: none;
+            user-select: none;
+            cursor: default;
+        }
+        input, button, textarea, :focus {
+            outline: none; // You should add some other style for :focus to help UX/a11y
+        }
+        body {
+            background-image: url("img/bg.jpg");
+        }
+    </style>
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 </head>
 
 <body>
-  <!--<h1>Hello World!</h1>-->
-  <div class="container">
-    <br />
-    <br />
-    <br />
+<!--<h1>Hello World!</h1>-->
+<div class="container">
+    <br/>
+    <br/>
+    <br/>
     <div class="col s4">
-      <!-- Promo Content 1 goes here -->
+        <!-- Promo Content 1 goes here -->
     </div>
     <div class="col s4">
-      <div class="card blue-grey lighten-5 hoverable z-depth-3">
-        <div class="card-content black-text">
-          <span class="card-title">Welcome Back.</span>
-          <p>Logon to your personal, decentralized workspace.</p>
-          <br />
+        <div class="card blue-grey lighten-5 hoverable z-depth-3">
+            <div class="card-content black-text">
+                <span class="card-title">Welcome Back.</span>
+                <p>Logon to your personal, decentralized workspace.</p>
+                <br/>
 
-          <div class="row">
-            <div class="input-field col s12">
-              <input id="username" type="text" class="validate">
-              <label for="username">Username</label>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input id="username" type="text" class="validate">
+                        <label for="username">Username</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input id="password" type="password" class="validate">
+                        <label for="password">Password</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input id="registry" type="text" class="validate">
+                        <label for="registry">Registry</label>
+                    </div>
+                </div>
             </div>
-          </div>
-          <div class="row">
-            <div class="input-field col s12">
-              <input id="password" type="password" class="validate">
-              <label for="password">Password</label>
+            <div class="card-action">
+                <a class="waves-effect waves-light btn" onclick="logon()">
+                    <i class="material-icons left">cloud</i>Logon</a>
+                <a class="waves-effect waves-light btn" onclick="register()">
+                    <i class="material-icons left">cloud</i>Register</a>
             </div>
-          </div>
-          <div class="row">
-            <div class="input-field col s12">
-              <input id="registry" type="text" class="validate">
-              <label for="registry">Registry</label>
-            </div>
-          </div>
         </div>
-        <div class="card-action">
-          <a class="waves-effect waves-light btn" onclick="logon()">
-            <i class="material-icons left">cloud</i>Logon</a>
-          <a class="waves-effect waves-light btn" onclick="register()">
-            <i class="material-icons left">cloud</i>Register</a>
-        </div>
-      </div>
     </div>
     <div class="col s4">
-      <!-- Promo Content 3 goes here -->
+        <!-- Promo Content 3 goes here -->
     </div>
-  </div>
-  <!-- All of the Node.js APIs are available in this renderer process. -->
-  <center>
+</div>
+<!-- All of the Node.js APIs are available in this renderer process. -->
+<center>
     Inter-Planetary Desktop v1.0 using
-    <script>document.write(process.versions.node)</script>, Chromium
-    <script>document.write(process.versions.chrome)</script>, and Electron
-    <script>document.write(process.versions.electron)</script>.
-  </center>
+    <script>document.write(process.versions.node)</script>
+    , Chromium
+    <script>document.write(process.versions.chrome)</script>
+    , and Electron
+    <script>document.write(process.versions.electron)</script>
+    .
+</center>
 
-  <script type="text/javascript" src="materialize/js/materialize.min.js"></script>
-  <script type="text/javascript" src="node_modules/socket.io-client/dist/socket.io.js"></script>
-  <script type="text/javascript" src="renderer.js"></script>
+<script type="text/javascript" src="materialize/js/materialize.min.js"></script>
+<script type="text/javascript" src="node_modules/socket.io-client/dist/socket.io.js"></script>
+<script type="text/javascript" src="renderer.js"></script>
+
 </body>
 
 </html>

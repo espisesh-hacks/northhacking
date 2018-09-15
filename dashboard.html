@@ -2,75 +2,86 @@
 <html>
 
 <head>
-  <!--Import Google Icon Font-->
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <!--Import materialize.css-->
-  <link type="text/css" rel="stylesheet" href="materialize/css/materialize.min.css" media="screen,projection" />
-  <style>
-    body {
-      background-image: url("img/bg.jpg");
-    }
-  </style>
-  <!--Let browser know website is optimized for mobile-->
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="materialize/css/materialize.min.css" media="screen,projection"/>
+    <link type="text/css" rel="stylesheet" href="test.css"/>
+    <style>
+        :not(input):not(textarea),
+        :not(input):not(textarea)::after,
+        :not(input):not(textarea)::before {
+            -webkit-user-select: none;
+            user-select: none;
+            cursor: default;
+        }
+        input, button, textarea, :focus {
+            outline: none; // You should add some other style for :focus to help UX/a11y
+        }
+    </style>
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 </head>
 
 <body>
-  <!--<h1>Hello World!</h1>-->
-  <div class="container">
-    <br />
-    <br />
-    <br />
-    <div class="col s4">
-      <!-- Promo Content 1 goes here -->
-    </div>
-    <div class="col s4">
-      <div class="card blue-grey lighten-5 hoverable z-depth-3">
-        <div class="card-content black-text">
-          <span class="card-title">Welcome Back.</span>
-          <p>Logon to your personal, decentralized workspace.</p>
-          <br />
+<!--<h1>Hello World!</h1>-->
+<div class="container">
+    <br/>
+    <br/>
+    <br/>
+    <div class="col s4"></div>
+    <div class="container card gradient-45deg-cyan-light-green gradient-shadow">
+        <br>
+        <div class="col s4"></div>
+        <span class="card-title center white-text"> <center>Desktops</center></span>
+        <div class="row" id="vmlist">
 
-          <div class="row">
-            <div class="input-field col s12">
-              <input id="username" type="text" class="validate">
-              <label for="username">Username</label>
-            </div>
-          </div>
-          <div class="row">
-            <div class="input-field col s12">
-              <input id="password" type="password" class="validate">
-              <label for="password">Password</label>
-            </div>
-          </div>
-          <div class="row">
-            <div class="input-field col s12">
-              <input id="register" type="text" class="validate">
-              <label for="register">Register</label>
-            </div>
-          </div>
         </div>
-        <div class="card-action">
-          <a class="waves-effect waves-light btn" onclick="logon()">
-            <i class="material-icons left">cloud</i>Logon</a>
-        </div>
-      </div>
     </div>
-    <div class="col s4">
-      <!-- Promo Content 3 goes here -->
-    </div>
-  </div>
-  <!-- All of the Node.js APIs are available in this renderer process. -->
-  <center>
+</div>
+<!-- All of the Node.js APIs are available in this renderer process. -->
+<center>
     Inter-Planetary Desktop v1.0 using
-    <script>document.write(process.versions.node)</script>, Chromium
-    <script>document.write(process.versions.chrome)</script>, and Electron
-    <script>document.write(process.versions.electron)</script>.
-  </center>
+    <script>document.write(process.versions.node)</script>
+    , Chromium
+    <script>document.write(process.versions.chrome)</script>
+    , and Electron
+    <script>document.write(process.versions.electron)</script>
+    .
+</center>
 
-  <script type="text/javascript" src="materialize/js/materialize.min.js"></script>
-  <script type="text/javascript" src="node_modules/socket.io-client/dist/socket.io.js"></script>
-  <script type="text/javascript" src="renderer.js"></script>
+<script type="text/javascript" src="materialize/js/materialize.min.js"></script>
+<script type="text/javascript" src="node_modules/socket.io-client/dist/socket.io.js"></script>
+<script type="text/javascript" src="renderer.js"></script>
+<script type="text/javascript">
+    console.log("loading desktops: " + JSON.stringify(remote.getGlobal('vms').object));
+    for (let i in remote.getGlobal('vms').object) {
+        let vm = remote.getGlobal('vms').object[i];
+        console.log("loading desktop: " + JSON.stringify(vm));
+        let img_src;
+        switch (vm.base_image) {
+            case "https://storage.cloud.google.com/estiimages/ubuntu.qcow2":
+                img_src = "img/Ubuntu.png";
+                break;
+            case "https://storage.cloud.google.com/estiimages/win10.qcow2":
+                img_src = "img/Windows.png";
+                break;
+        }
+        document.getElementById('vmlist').innerHTML += `
+        <div class="col s1">
+            <div class="card gradient-45deg-blue-grey-blue gradient-shadow waves-effect waves-light">
+                <div class="card-image">
+                    <img src="` + img_src + `" draggable="false">
+                </div>
+                <span class="card-title white-text"><center>` + vm.name + `</center></span>
+            </div>
+        </div>
+        `
+    }
+    document.getElementById('vmlist').innerHTML += `
+
+    `
+</script>
 </body>
 
 </html>
