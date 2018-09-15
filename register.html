@@ -27,8 +27,8 @@
     <div class="col s4">
       <div class="card blue-grey lighten-5 hoverable z-depth-3">
         <div class="card-content black-text">
-          <span class="card-title">Welcome Back.</span>
-          <p>Logon to your personal, decentralized workspace.</p>
+          <span class="card-title">Register.</span>
+          <p>Create your own personal, decentralized workspace. <a href="index.html">Or go back...</a></p>
           <br />
 
           <div class="row">
@@ -52,8 +52,6 @@
         </div>
         <div class="card-action">
           <a class="waves-effect waves-light btn" onclick="logon()">
-            <i class="material-icons left">cloud</i>Logon</a>
-          <a class="waves-effect waves-light btn" href="register.html">
             <i class="material-icons left">cloud</i>Register</a>
         </div>
       </div>
@@ -76,16 +74,7 @@
   <script>
     // You can also require other files to run in this process
     //require('./renderer.js');
-    var socket = io('http://localhost');
-    socket.on('connect', function () {
-
-    });
-    socket.on('event', function (data) {
-
-    });
-    socket.on('disconnect', function () {
-
-    });
+    
   </script>
 </body>
 
