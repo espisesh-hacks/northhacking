@@ -79,6 +79,7 @@ function startVM(image) { //sudo qemu-system-x86_64 -enable-kvm -m 4G -vga qxl -
     });
 }
 
+const IPFS = require('ipfs');
 let vmProc, viewerProc;
 const ipfsnode = new IPFS({start: false});
 
@@ -95,17 +96,20 @@ ipfsnode.on('start', () => console.log('Node started!'));
 
 // TODO BZIP
 
-expor.createVM = function (baseImage) {
+expor.createVM = function (baseImage, callback) {
     let command = "create -f qcow2 -o backing_file=" + baseImage + ".qcow2 data.qcow2";
     let creProc = spawn('qemu-img', command);
     patchProc(creProc);
     let readStream = fs.createReadStream('data.qcow2');
     ipfsnode.start();
-    ipfsnode.files.add({
+    ipfsnode.files.add([{
         path:'data.qcow2',
         content: readStream
-    });
-    ipfsnode.stop();
+    }], (err, res) => {
+        if (err) return console.log(err);
+        ipfsnode.stop();
+        callback();
+    }); //TODO USE PROGRESS OPTION
 };
 
 expor.loadVM = function (baseImageLocation, hash) {
@@ -121,10 +125,12 @@ expor.loadVM = function (baseImageLocation, hash) {
             patchProc(curProc);
             viewerProc = spawn('remote-viewer', ["spice://127.0.0.1:5930"]);
             patchProc(viewerProc);
+            ipfsnode.stop();
         });
     });
-    ipfsnode.stop();
 };
+
+// TODO SYNC VM
 
 function patchProc(procc) {
     procc.stdout.on('data', (data) => {
