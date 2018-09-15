@@ -5688,6 +5688,7 @@ li.home:before {
   box-shadow: 0 6px 20px 0 rgba(0, 229, 255, 0.5);
 }
 
+/* IPD Stuff Colors for Dashboard */
 .gradient-45deg-blue-grey-blue-grey {
   background: #cfd8dc;
   background: -webkit-linear-gradient(45deg, #cfd8dc 0%, #546e7a 100%);
