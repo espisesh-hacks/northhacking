@@ -2,7 +2,8 @@
 const {app, BrowserWindow} = require('electron')
 
 // IPD Globals
-global.ipdUser = {username: null};
+global.ipdUser = {username: null, password: null};
+global.vms = {object: null};
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.

@@ -1,22 +1,31 @@
 // This file is required by the index.html file and will
 // be executed in the renderer process for that window.
 // All of the Node.js APIs are available in this process.
+M.AutoInit();
+
 var remote = require('electron').remote;
 remote.getGlobal('ipdUser').username = "sesh";
 
 var socket = io('http://localhost');
-socket.on('connect', function () {
-
-});
-socket.on('event', function (data) {
-
-});
-socket.on('disconnect', function () {
-
-});
 
 function logon() {
+    socket = io(document.getElementById('registry').value);
     console.log(remote.getGlobal('ipdUser').username);
+    socket.emit('login', {
+        username: document.getElementById('username').value,
+        password: document.getElementById('password').value
+    }, function (data) {
+        if (data) {
+            M.toast({html: 'Successfully logged in!'});
+            remote.getGlobal('ipdUser').username = document.getElementById('username').value;
+            remote.getGlobal('ipdUser').password = document.getElementById('password').value;
+            socket.emit('vmlist', remote.getGlobal('ipdUser'), function (data) {
+                remote.getGlobal('vms').object = data;
+            });
+        } else {
+            M.toast({html: 'Invalid username/password.', classes: 'red'});
+        }
+    })
 }
 
 /* QEMU VM */
