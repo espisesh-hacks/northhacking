@@ -5,6 +5,7 @@ const fs = require('fs');
 // IPD Globals
 global.ipdUser = {username: null, password: null};
 global.vms = {object: null};
+global.curVM = {name: null};
 
 const expor = module.exports = {};
 
@@ -108,7 +109,7 @@ expor.createVM = function (baseImage, callback) {
     }], (err, res) => {
         if (err) return console.log(err);
         ipfsnode.stop();
-        callback();
+        callback(res.hash);
     }); //TODO USE PROGRESS OPTION
 };
 
@@ -121,8 +122,8 @@ expor.loadVM = function (baseImageLocation, hash) {
         fs.writeFile("data.qcow2", file, (err) => {
             if (err) return console.log(err);
             let command = "-enable-kvm -m 4G -vga qxl -hda data.qcow2 -smp 4 -cpu host -spice port=5930,disable-ticketing -device virtio-serial-pci -device virtserialport,chardev=spicechannel0,name=com.redhat.spice.0 -chardev spicevmc,id=spicechannel0,name=vdagent";
-            curProc = spawn('qemu-system-x86_64', command.split(" "));
-            patchProc(curProc);
+            vmProc = spawn('qemu-system-x86_64', command.split(" "));
+            patchProc(vmProc);
             viewerProc = spawn('remote-viewer', ["spice://127.0.0.1:5930"]);
             patchProc(viewerProc);
             ipfsnode.stop();

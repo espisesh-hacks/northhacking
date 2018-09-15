@@ -50,3 +50,7 @@ function register() { // no checks for duplicate usernames
         password: document.getElementById('password').value
     })
 }
+
+function vmClick(vm) {
+
+}

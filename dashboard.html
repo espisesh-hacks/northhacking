@@ -5,8 +5,8 @@
     <!--Import Google Icon Font-->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!--Import materialize.css-->
-    <link type="text/css" rel="stylesheet" href="materialize/css/materialize.min.css" media="screen,projection" />
-    <link type="text/css" rel="stylesheet" href="test.css" />
+    <link type="text/css" rel="stylesheet" href="materialize/css/materialize.min.css" media="screen,projection"/>
+    <link type="text/css" rel="stylesheet" href="test.css"/>
     <style>
         :not(input):not(textarea),
         :not(input):not(textarea)::after,
@@ -27,60 +27,82 @@
             background-color: black;
             overflow-x: hidden;
         }
-        ::-webkit-scrollbar { display: none; }
+
+        ::-webkit-scrollbar {
+            display: none;
+        }
 
     </style>
     <!--Let browser know website is optimized for mobile-->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 </head>
-
 <body id="particles-js">
-    <!--<h1>Hello World!</h1>-->
-    <div class="container" style="position: absolute;">
-        <br/>
-        <br/>
-        <br/>
-        <div class="col s4"> </div>
-        <div class="col s4 container card gradient-45deg-blue-grey-blue-grey gradient-shadow z-depth-4" >
-            <br>
-            <div class="col s4"></div>
-            <span class="card-title center white-text">
+<!--<h1>Hello World!</h1>-->
+<div class="container" style="position: absolute;">
+    <br/>
+    <br/>
+    <br/>
+    <div class="col s4"></div>
+    <div class="col s4 container card gradient-45deg-blue-grey-blue-grey gradient-shadow z-depth-4">
+        <br>
+        <div class="col s4"></div>
+        <span class="card-title center white-text">
                 <center>Desktops</center>
             </span>
-            <div class="row" id="vmlist">
+        <div class="row" id="vmlist">
 
-            </div>
         </div>
-        <div class="col s4"></div>
     </div>
-    <!-- All of the Node.js APIs are available in this renderer process. -->
-    <center>
-        Inter-Planetary Desktop v1.0 using
-        <script>document.write(process.versions.node)</script> , Chromium
-        <script>document.write(process.versions.chrome)</script> , and Electron
-        <script>document.write(process.versions.electron)</script> .
-    </center>
+    <div class="col s4"></div>
+</div>
+<!-- All of the Node.js APIs are available in this renderer process. -->
+<center>
+    Inter-Planetary Desktop v1.0 using
+    <script>document.write(process.versions.node)</script>
+    , Chromium
+    <script>document.write(process.versions.chrome)</script>
+    , and Electron
+    <script>document.write(process.versions.electron)</script>
+    .
+</center>
 
-    <script type="text/javascript" src="materialize/js/materialize.min.js"></script>
-    <script type="text/javascript" src="node_modules/socket.io-client/dist/socket.io.js"></script>
-    <script type="text/javascript" src="renderer.js"></script>
-    <script type="text/javascript">
-        console.log("loading desktops: " + JSON.stringify(remote.getGlobal('vms').object));
-        for (let i in remote.getGlobal('vms').object) {
-            let vm = remote.getGlobal('vms').object[i];
-            console.log("loading desktop: " + JSON.stringify(vm));
-            let img_src;
-            switch (vm.base_image) {
-                case "http://ipdesktop.net:8080/ubuntu.qcow2":
-                    img_src = "img/Ubuntu.png";
-                    break;
-                case "http://ipdesktop.net:8080/win10.qcow2":
-                    img_src = "img/Windows.png";
-                    break;
-            }
-            document.getElementById('vmlist').innerHTML += `
+
+<!-- Modal -->
+<div id="modalmain" class="modal">
+    <div class="modal-content">
+        <h4>
+            <div id="vm_name"></div>
+        </h4>
+        <a id="vm_launch" class="gradient-45deg-light-blue-teal gradient-shadow waves-effect waves-light btn-large"><i
+                class="material-icons left" onclick="launchVM()">power_settings_new</i>Launch</a>
+        <div id="loading_bar" class="progress" style="display: none;">
+            <div class="indeterminate"></div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" src="materialize/js/materialize.min.js"></script>
+<script type="text/javascript" src="node_modules/socket.io-client/dist/socket.io.js"></script>
+<script type="text/javascript" src="renderer.js"></script>
+<script type="text/javascript">
+    import * as M from "./materialize/js/materialize";
+
+    console.log("loading desktops: " + JSON.stringify(remote.getGlobal('vms').object));
+    for (let i in remote.getGlobal('vms').object) {
+        let vm = remote.getGlobal('vms').object[i];
+        console.log("loading desktop: " + JSON.stringify(vm));
+        let img_src;
+        switch (vm.base_image) {
+            case "http://ipdesktop.net:8080/ubuntu.qcow2":
+                img_src = "img/Ubuntu.png";
+                break;
+            case "http://ipdesktop.net:8080/win10.qcow2":
+                img_src = "img/Windows.png";
+                break;
+        }
+        document.getElementById('vmlist').innerHTML += `
         <div class="col s1">
-            <div class="card gradient-45deg-blue-grey-blue gradient-shadow waves-effect waves-light">
+            <div class="card gradient-45deg-blue-grey-blue gradient-shadow waves-effect waves-light" id=` + vm.name + ` onclick=openModal(this)>
                 <div class="card-image">
                     <img src="` + img_src + `" draggable="false">
                 </div>
@@ -88,8 +110,8 @@
             </div>
         </div>
         `
-        }
-        document.getElementById('vmlist').innerHTML += `
+    }
+    document.getElementById('vmlist').innerHTML += `
             <div class="col s1">
             <div class="card gradient-45deg-blue-grey-blue gradient-shadow waves-effect waves-light">
                 <div class="card-image">
@@ -99,17 +121,26 @@
             </div>
         </div>
     `
-    </script>
-    <script src="particles.js"></script>
-    <script>
-        /* particlesJS.load(@dom-id, @path-json, @callback (optional)); */
-        particlesJS.load('particles-js', 'assets/particles.json', function () {
-            console.log('callback - particles.js config loaded');
-        });
-    </script>
-    <!--
-    <script type="text/javascript" src="particle/sketch.js"></script>
-    <script type="text/javascript" src="particle/particle.js"></script>-->
+    function openModal(element) {
+        remote.getGlobal('curVM').name = element.id;
+        M.Modal.getInstance(document.getElementById("modalmain")).open();
+    }
+    function launchVM() {
+        document.getElementById("vm_launch").style = "display: none";
+        document.getElementById("loading_bar").style = "display: inline;";
+
+    }
+</script>
+<script src="particles.js"></script>
+<script>
+    /* particlesJS.load(@dom-id, @path-json, @callback (optional)); */
+    particlesJS.load('particles-js', 'assets/particles.json', function () {
+        console.log('callback - particles.js config loaded');
+    });
+</script>
+<!--
+<script type="text/javascript" src="particle/sketch.js"></script>
+<script type="text/javascript" src="particle/particle.js"></script>-->
 </body>
 
 </html>
