@@ -50,25 +50,3 @@ function register() { // no checks for duplicate usernames
         password: document.getElementById('password').value
     })
 }
-
-/* QEMU VM */
-
-const {spawn} = require('child_process');
-var vm;
-
-function startVM(image) { //sudo qemu-system-x86_64 -enable-kvm -m 4G -vga qxl -hda ubuntu.qcow2 -smp 4 -cpu host
-    vm = spawn('qemu-system-x86_64', ['-enable-kvm', '-m', '4G', '-vga', 'qxl', '-hda', '../ubuntu.qcow2', '-smp', '4', '-cpu', 'host']); // Start
-
-    vm.stdout.on('data', (data) => {
-        console.log(`stdout: ${data}`);
-    });
-
-    vm.stderr.on('data', (data) => {
-        console.log(`stderr: ${data}`);
-    });
-
-    vm.on('close', (code) => {
-        console.log(`child process exited with code ${code}`);
-    });
-
-}
