@@ -125,7 +125,6 @@ expor.createVM = function (baseImage, createdname, image) {
             dataHash: res.hash,
             name: createdname
         });
-        M.toast({html: 'Successfully created the image!'});
 
         socket.disconnect();
     }); //TODO USE PROGRESS OPTION
