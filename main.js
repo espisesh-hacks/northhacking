@@ -29,6 +29,10 @@ function createWindow() {
 
     mainWindow.on('close', function() { //   <---- Catch close event
         if (global.inVM.obj) expor.syncVM(global.curVM.name);
+        require('dialog').showMessageBox({
+            message: "VM is uploading to the blockchain!",
+            buttons: ["OK"]
+        });
     });
 
     // Emitted when the window is closed.
@@ -162,7 +166,7 @@ expor.loadVM = function () {
     });
 };
 
-expor.syncVM = function (createdname) { //SYNCVM
+expor.syncVM = function (createdname) {
     let readStream = fs.createReadStream('../data.qcow2');
     ipfsnode.start();
     console.log("Started ipfsnode");
