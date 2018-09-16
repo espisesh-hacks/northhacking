@@ -132,7 +132,7 @@ expor.createVM = function (baseImage, createdname, image) {
 
 expor.loadVM = function (baseImageLocation, hash) {
     ipfsnode.start();
-    ipfs.files.cat(hash, function (err, file) { // TODO files.get instead?
+    ipfsnode.files.cat(hash, function (err, file) { // TODO files.get instead?
         if (err) {
             throw err;
         }
