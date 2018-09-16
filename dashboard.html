@@ -124,6 +124,12 @@
         console.log("loading desktop: " + JSON.stringify(vm));
         let img_src;
         switch (vm.base_image) {
+            case "ubuntu":
+                img_src = "img/Ubuntu.png";
+                break;
+            case "windows":
+                img_src = "img/Windows.png";
+                break;
             case "http://ipdesktop.net:8080/ubuntu.qcow2":
                 img_src = "img/Ubuntu.png";
                 break;

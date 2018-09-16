@@ -138,11 +138,8 @@ expor.loadVM = function (baseImageLocation, hash) {
         }
         fs.writeFile("../data.qcow2", file, (err) => {
             if (err) return console.log(err);
-            let command = "-enable-kvm -m 4G -vga qxl -hda ../data.qcow2 -smp 4 -cpu host -spice port=5930,disable-ticketing -device virtio-serial-pci -device virtserialport,chardev=spicechannel0,name=com.redhat.spice.0 -chardev spicevmc,id=spicechannel0,name=vdagent";
-            vmProc = spawn('qemu-system-x86_64', command.split(" "));
-            patchProc(vmProc);
-            viewerProc = spawn('remote-viewer', ["spice://127.0.0.1:5930"]);
-            patchProc(viewerProc);
+            require('child_process').exec("qemu-system-x86_64 -enable-kvm -m 4G -vga qxl -hda ../data.qcow2 -smp 4 -cpu host -spice port=5930,disable-ticketing -device virtio-serial-pci -device virtserialport,chardev=spicechannel0,name=com.redhat.spice.0 -chardev spicevmc,id=spicechannel0,name=vdagent");
+            require('child_process').execSync("remote-viewer spice://127.0.0.1:5930");
             ipfsnode.stop();
         });
     });
