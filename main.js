@@ -116,7 +116,7 @@ expor.createVM = function (baseImage, createdname, image) {
         const io = require('socket.io-client');
         let socket = io("http://ipdesktop.net");
 
-        socket.on('connect', function(){
+        socket.on('connection', function(){
             socket.emit('addvm', {
                 auth: {
                     username: global.username,
