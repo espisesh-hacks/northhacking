@@ -9,6 +9,7 @@ remote.getGlobal('ipdUser').username = "sesh";
 let socket;
 
 function recreateSocket (ip) {
+    remote.getGlobal('ip').ip = ip;
     if (socket != undefined) socket.disconnect();
     socket = io(ip);
     socket.on('connection', function(data) {
