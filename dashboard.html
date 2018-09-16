@@ -194,7 +194,9 @@
     function startVMLocal(element) {
         for (let i in remote.getGlobal('vms').object) {
             let obj = remote.getGlobal('vms').object[i];
+
             remote.getGlobal('temp').obj = ("" + obj.hash.toString()).toString();
+            console.log(JSON.stringify(remote.getGlobal('temp').obj));
             remote.getGlobal('host').loadVM();
         }
     }
