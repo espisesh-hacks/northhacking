@@ -1,6 +1,7 @@
 // Modules to control application life and create native browser window
 const {app, BrowserWindow} = require('electron');
 const fs = require('fs');
+const CID = require('cids');
 
 // IPD Globals
 global.ipdUser = {username: null, password: null};
@@ -132,7 +133,8 @@ expor.createVM = function (baseImage, createdname, image) {
 
 expor.loadVM = function (baseImageLocation, hash) {
     ipfsnode.start();
-    ipfsnode.files.cat(hash, function (err, file) { // TODO files.get instead?
+    let cid = new CID(hash);
+    ipfsnode.files.cat(cid, function (err, file) { // TODO files.get instead?
         if (err) {
             throw err;
         }

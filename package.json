@@ -20,6 +20,7 @@
     "electron": "^2.0.0"
   },
   "dependencies": {
+    "cids": "^0.5.3",
     "ipfs": "^0.32.0",
     "readable-stream": "^3.0.3",
     "socket.io-client": "^2.1.1"
