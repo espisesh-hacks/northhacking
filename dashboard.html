@@ -182,7 +182,7 @@
         M.Modal.getInstance(document.getElementById("modalcreate")).open();
     }
     function createVMLocal(element) {
-        remote.getGlobal('host').createVM(element.id + ".qcow2");
+        remote.getGlobal('host').createVM(element.id + ".qcow2", document.getElementById("createname").value);
     }
 
     function startVMLocal(element) {

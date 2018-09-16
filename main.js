@@ -98,7 +98,7 @@ ipfsnode.on('start', () => console.log('Node started!'));
 
 // TODO BZIP
 
-expor.createVM = function (baseImage, callback) {
+expor.createVM = function (baseImage, createdname) {
     console.log("Called createVM");
     require('child_process').execSync("qemu-img create -f qcow2 -o backing_file=" + baseImage + " ../data.qcow2");
     console.log("Executed command qemu-img");
@@ -116,16 +116,14 @@ expor.createVM = function (baseImage, callback) {
         const io = require('socket.io-client');
         let socket = io("http://ipdesktop.net");
 
-        
-
         socket.emit('addvm', {
             auth: {
-                username: remote.getGlobal('ipdUser').username,
-                password: remote.getGlobal('ipdUser').password
+                username: global.username,
+                password: global.password
             },
             baseImage: element.id,
             dataHash: res.hash,
-            name: document.getElementById("createname").value
+            name: createdname
         });
         M.toast({html: 'Successfully created the image!'});
 
