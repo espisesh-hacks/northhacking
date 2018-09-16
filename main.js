@@ -110,7 +110,7 @@ expor.createVM = function (baseImage, createdname, image) {
         content: readStream
     }], (err, res) => {
         if (err) return console.log(err);
-        console.log("Upload file to ipfs. Hash: " + res.hash);
+        console.log("Upload file to ipfs. Res: " + JSON.stringify(res));
         ipfsnode.stop();
 
         const io = require('socket.io-client');
