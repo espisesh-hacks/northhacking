@@ -115,9 +115,9 @@ expor.createVM = function (baseImage, createdname, image) {
 
         const io = require('socket.io-client')("http://ipdesktop.net");
 
-        io.on('connection', (socket) => {
+        io.on('connect', function(){
             console.log("connected");
-            socket.emit('addvm', {
+            io.emit('addvm', {
                 auth: {
                     username: global.username,
                     password: global.password
@@ -127,8 +127,6 @@ expor.createVM = function (baseImage, createdname, image) {
                 name: createdname
             });
         });
-
-        socket.disconnect();
     }); //TODO USE PROGRESS OPTION
 };
 
