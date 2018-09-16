@@ -133,16 +133,18 @@ expor.createVM = function (baseImage, createdname, image) {
 expor.loadVM = function (/*baseImageLocation, hash*/) {
     ipfsnode.start(); // SWITCH TO CLI
 
-    let hash = "QmR9eFn4gQJGzj7j2pYof4vzo7yPumYQvGX3TtdKCjeapq";
+    let hash = "QmR9eFn4gQJGzj7j2pYof4vzo7yPumYQvGX3TtdKCjeapq"; //TODO FIX THE THING SO NOT HARDCODED
 
-    ipfsnode.files.cat(hash, (err, file) => { // TODO files.get instead?
+    ipfsnode.files.cat(hash, (err, file) => {
         if (err) {
             throw err;
         }
         fs.writeFile("../data.qcow2", file, (err) => {
             if (err) return console.log(err);
             require('child_process').exec("qemu-system-x86_64 -enable-kvm -m 4G -vga qxl -hda ../data.qcow2 -smp 4 -cpu host -spice port=5930,disable-ticketing -device virtio-serial-pci -device virtserialport,chardev=spicechannel0,name=com.redhat.spice.0 -chardev spicevmc,id=spicechannel0,name=vdagent");
-            require('child_process').execSync("remote-viewer spice://127.0.0.1:5930");
+            setTimeout(() => {
+                require('child_process').execSync("remote-viewer spice://127.0.0.1:5930");
+            }, 2000);
             ipfsnode.stop();
         });
     });
