@@ -99,7 +99,7 @@ ipfsnode.on('start', () => console.log('Node started!'));
 
 expor.createVM = function (baseImage, callback) {
     let command = "create -f qcow2 -o backing_file=" + baseImage + ".qcow2 data.qcow2";
-    let creProc = spawn('qemu-img', command);
+    let creProc = spawn('qemu-img', command.split(" "));
     patchProc(creProc);
     let readStream = fs.createReadStream('data.qcow2');
     ipfsnode.start();
@@ -131,6 +131,18 @@ expor.loadVM = function (baseImageLocation, hash) {
     });
 };
 
+expor.syncVM = function (callback) {
+    let readStream = fs.createReadStream('data.qcow2');
+    ipfsnode.start();
+    ipfsnode.files.add([{
+        path:'data.qcow2',
+        content: readStream
+    }], (err, res) => {
+        if (err) return console.log(err);
+        ipfsnode.stop();
+        callback(res.hash);
+    }); //TODO USE PROGRESS OPTION
+};
 // TODO SYNC VM
 
 function patchProc(procc) {
@@ -146,3 +158,4 @@ function patchProc(procc) {
         console.log(`child process exited with code ${code}`);
     });
 }
+global.host = expor;
