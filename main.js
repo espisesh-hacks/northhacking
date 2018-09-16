@@ -168,7 +168,7 @@ expor.loadVM = function () {
 
 expor.syncVM = function (createdname) {
     let readStream = fs.createReadStream('../data.qcow2');
-    ipfsnode.start();
+    //ipfsnode.start();
     console.log("Started ipfsnode");
     ipfsnode.files.add([{
         path: '../data.qcow2',
