@@ -4,7 +4,6 @@
 M.AutoInit();
 
 let remote = require('electron').remote;
-remote.getGlobal('ipdUser').username = "sesh";
 
 let socket;
 
