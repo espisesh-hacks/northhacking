@@ -46,14 +46,14 @@
         <counts>
           <entry key="HTML" value="4677" />
           <entry key="JSON" value="64" />
-          <entry key="JavaScript" value="4546" />
+          <entry key="JavaScript" value="4558" />
           <entry key="Markdown" value="20" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="html" value="4677" />
-          <entry key="js" value="4546" />
+          <entry key="js" value="4558" />
           <entry key="json" value="64" />
           <entry key="md" value="20" />
         </counts>
@@ -64,11 +64,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/main.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="299">
-              <caret line="148" column="18" lean-forward="true" selection-start-line="148" selection-start-column="18" selection-end-line="148" selection-end-column="18" />
+            <state relative-caret-position="667">
+              <caret line="29" column="29" lean-forward="true" selection-start-line="29" selection-start-column="29" selection-end-line="29" selection-end-column="29" />
             </state>
           </provider>
         </entry>
@@ -106,11 +106,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/dashboard.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="353">
-              <caret line="198" column="68" lean-forward="true" selection-start-line="198" selection-start-column="68" selection-end-line="198" selection-end-column="68" />
+            <state relative-caret-position="183">
+              <caret line="167" lean-forward="true" selection-start-line="167" selection-end-line="167" />
               <folding>
                 <element signature="n#style#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
               </folding>
@@ -183,6 +183,7 @@
       <find>qcow2</find>
       <find>createname</find>
       <find>disconnect</find>
+      <find>curVM</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -217,9 +218,8 @@
       <path value="$PROJECT_DIR$/package.json" />
     </packageJsonPaths>
   </component>
-  <component name="ProjectFrameBounds" extendedState="4">
-    <option name="x" value="964" />
-    <option name="width" value="956" />
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="width" value="964" />
     <option name="height" value="1040" />
   </component>
   <component name="ProjectView">
@@ -278,18 +278,18 @@
       <workItem from="1536990947345" duration="1045000" />
       <workItem from="1537016553430" duration="19109000" />
       <workItem from="1537052808367" duration="4487000" />
-      <workItem from="1537057307420" duration="20317000" />
+      <workItem from="1537057307420" duration="20485000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="44958000" />
+    <option name="totallyTimeSpent" value="45126000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="964" y="0" width="956" height="1040" extended-state="4" />
+    <frame x="0" y="0" width="1920" height="1040" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.19935691" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.09804955" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="npm" order="2" side_tool="true" />
       <window_info id="Favorites" order="3" side_tool="true" />
@@ -382,20 +382,20 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/dashboard.html">
+    <entry file="file://$PROJECT_DIR$/main.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="353">
-          <caret line="198" column="68" lean-forward="true" selection-start-line="198" selection-start-column="68" selection-end-line="198" selection-end-column="68" />
-          <folding>
-            <element signature="n#style#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-          </folding>
+        <state relative-caret-position="667">
+          <caret line="29" column="29" lean-forward="true" selection-start-line="29" selection-start-column="29" selection-end-line="29" selection-end-column="29" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/main.js">
+    <entry file="file://$PROJECT_DIR$/dashboard.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="299">
-          <caret line="148" column="18" lean-forward="true" selection-start-line="148" selection-start-column="18" selection-end-line="148" selection-end-column="18" />
+        <state relative-caret-position="183">
+          <caret line="167" lean-forward="true" selection-start-line="167" selection-end-line="167" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

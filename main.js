@@ -27,7 +27,7 @@ function createWindow() {
     // mainWindow.webContents.openDevTools()
 
     mainWindow.on('close', function() { //   <---- Catch close event
-        syncVM();
+        syncVM(global.curVM);
     });
 
     // Emitted when the window is closed.
