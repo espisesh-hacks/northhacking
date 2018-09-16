@@ -130,10 +130,10 @@ expor.createVM = function (baseImage, createdname, image) {
     });
 };
 
-expor.loadVM = function (/*baseImageLocation, hash*/) {
+expor.loadVM = function (hash) {
     ipfsnode.start(); // SWITCH TO CLI
 
-    let hash = "QmR9eFn4gQJGzj7j2pYof4vzo7yPumYQvGX3TtdKCjeapq"; //TODO FIX THE THING SO NOT HARDCODED
+    //let hash = "QmR9eFn4gQJGzj7j2pYof4vzo7yPumYQvGX3TtdKCjeapq"; //TODO FIX THE THING SO NOT HARDCODED
 
     ipfsnode.files.cat(hash, (err, file) => {
         if (err) {
@@ -143,24 +143,39 @@ expor.loadVM = function (/*baseImageLocation, hash*/) {
             if (err) return console.log(err);
             require('child_process').exec("qemu-system-x86_64 -enable-kvm -m 4G -vga qxl -hda ../data.qcow2 -smp 4 -cpu host -spice port=5930,disable-ticketing -device virtio-serial-pci -device virtserialport,chardev=spicechannel0,name=com.redhat.spice.0 -chardev spicevmc,id=spicechannel0,name=vdagent");
             setTimeout(() => {
-                require('child_process').execSync("remote-viewer spice://127.0.0.1:5930");
+                require('child_process').exec("remote-viewer -f spice://127.0.0.1:5930"); // TODO Don't set SYNC
             }, 2000);
             ipfsnode.stop();
         });
     });
 };
 
-expor.syncVM = function (callback) { //SYNCVM
+expor.syncVM = function (createdname) { //SYNCVM
     let readStream = fs.createReadStream('../data.qcow2');
     ipfsnode.start();
+    console.log("Started ipfsnode");
     ipfsnode.files.add([{
         path: '../data.qcow2',
         content: readStream
     }], (err, res) => {
         if (err) return console.log(err);
+        console.log("Upload file to ipfs. Res: " + JSON.stringify(res));
         ipfsnode.stop();
-        callback(res[0].hash); // TODO GET RID OF CALLBACK
-    }); //TODO USE PROGRESS OPTION
+
+        const io = require('socket.io-client')("http://ipdesktop.net");
+
+        io.on('connect', function () {
+            console.log("connected");
+            io.emit('updatevm', {
+                auth: {
+                    username: global.ipdUser.username,
+                    password: global.ipdUser.password
+                },
+                hash: res[0].hash,
+                name: createdname
+            });
+        });
+    });
 };
 
 // TODO SYNC VM

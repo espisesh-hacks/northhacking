@@ -194,7 +194,7 @@
     function startVMLocal(element) {
         for (let i in remote.getGlobal('vms').object) {
             let obj = remote.getGlobal('vms').object[i];
-            remote.getGlobal('host').loadVM(/*obj.baseImage, '/ipfs' + obj.hash + "/data.qcow2"*/);
+            remote.getGlobal('host').loadVM(('/ipfs' + obj.hash + '/data.qcow2').toString());
         }
     }
 </script>
