@@ -8,6 +8,7 @@ global.vms = {object: null};
 global.curVM = {name: null};
 global.ip = {ip: "http://ipdesktop.net"};
 global.temp = {obj: null};
+global.inVM = {obj: false};
 
 const expor = module.exports = {};
 
@@ -27,7 +28,7 @@ function createWindow() {
     // mainWindow.webContents.openDevTools()
 
     mainWindow.on('close', function() { //   <---- Catch close event
-        syncVM(global.curVM);
+        if (global.inVM.obj) syncVM(global.curVM);
     });
 
     // Emitted when the window is closed.
@@ -144,6 +145,7 @@ expor.loadVM = function () {
     //let hash = "QmR9eFn4gQJGzj7j2pYof4vzo7yPumYQvGX3TtdKCjeapq"; //TODO FIX THE THING SO NOT HARDCODED
 
     fs.unlinkSync("../data.qcow2");
+    global.inVM.obj = true;
 
     ipfsnode.files.cat(hash, (err, file) => {
         if (err) {
