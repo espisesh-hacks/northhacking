@@ -1,7 +1,6 @@
 // Modules to control application life and create native browser window
 const {app, BrowserWindow} = require('electron');
 const fs = require('fs');
-const CID = require('cids');
 
 // IPD Globals
 global.ipdUser = {username: null, password: null};
@@ -107,7 +106,7 @@ expor.createVM = function (baseImage, createdname, image) {
     ipfsnode.start();
     console.log("Started ipfsnode");
     ipfsnode.files.add([{
-        path:'../data.qcow2',
+        path: '../data.qcow2',
         content: readStream
     }], (err, res) => {
         if (err) return console.log(err);
@@ -116,7 +115,7 @@ expor.createVM = function (baseImage, createdname, image) {
 
         const io = require('socket.io-client')("http://ipdesktop.net");
 
-        io.on('connect', function(){
+        io.on('connect', function () {
             console.log("connected");
             io.emit('addvm', {
                 auth: {
@@ -132,28 +131,25 @@ expor.createVM = function (baseImage, createdname, image) {
 };
 
 expor.loadVM = function (baseImageLocation, hash) {
-    ipfsnode.start();
-    let cid = new CID(hash);
-    ipfsnode.files.get(cid, function (err, files) { // TODO files.get instead?
+    ipfsnode.start(); // SWITCH TO CLI
+    ipfsnode.files.cat(hash, (err, file) => { // TODO files.get instead?
         if (err) {
             throw err;
         }
-        files.forEach((file) => {
-            fs.writeFile("../data.qcow2", file, (err) => {
-                if (err) return console.log(err);
-                require('child_process').exec("qemu-system-x86_64 -enable-kvm -m 4G -vga qxl -hda ../data.qcow2 -smp 4 -cpu host -spice port=5930,disable-ticketing -device virtio-serial-pci -device virtserialport,chardev=spicechannel0,name=com.redhat.spice.0 -chardev spicevmc,id=spicechannel0,name=vdagent");
-                require('child_process').execSync("remote-viewer spice://127.0.0.1:5930");
-                ipfsnode.stop();
-            });
+        fs.writeFile("../data.qcow2", file, (err) => {
+            if (err) return console.log(err);
+            require('child_process').exec("qemu-system-x86_64 -enable-kvm -m 4G -vga qxl -hda ../data.qcow2 -smp 4 -cpu host -spice port=5930,disable-ticketing -device virtio-serial-pci -device virtserialport,chardev=spicechannel0,name=com.redhat.spice.0 -chardev spicevmc,id=spicechannel0,name=vdagent");
+            require('child_process').execSync("remote-viewer spice://127.0.0.1:5930");
+            ipfsnode.stop();
         });
     });
 };
 
-expor.syncVM = function (callback) {
+expor.syncVM = function (callback) { //SYNCVM
     let readStream = fs.createReadStream('../data.qcow2');
     ipfsnode.start();
     ipfsnode.files.add([{
-        path:'../data.qcow2',
+        path: '../data.qcow2',
         content: readStream
     }], (err, res) => {
         if (err) return console.log(err);
@@ -161,6 +157,7 @@ expor.syncVM = function (callback) {
         callback(res[0].hash); // TODO GET RID OF CALLBACK
     }); //TODO USE PROGRESS OPTION
 };
+
 // TODO SYNC VM
 
 function patchProc(procc) {
@@ -176,4 +173,5 @@ function patchProc(procc) {
         console.log(`child process exited with code ${code}`);
     });
 }
+
 global.host = expor;
