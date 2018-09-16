@@ -112,7 +112,11 @@ expor.createVM = function (baseImage, callback) {
         if (err) return console.log(err);
         console.log("Upload file to ipfs. Hash: " + res.hash);
         ipfsnode.stop();
-        let socket = require('socket.io-client')(global.ip);
+
+        const io = require('socket.io-client');
+        let socket = io("http://ipdesktop.net");
+
+        
 
         socket.emit('addvm', {
             auth: {
