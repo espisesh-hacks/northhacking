@@ -25,6 +25,7 @@ function recreateSocket (ip) {
             M.toast({html: 'Successfully logged in!'});
             remote.getGlobal('ipdUser').username = document.getElementById('username').value;
             remote.getGlobal('ipdUser').password = document.getElementById('password').value;
+            console.log("User: " + remote.getGlobal('ipdUser').username + " Password: " + remote.getGlobal('ipdUser').username);
             socket.emit('vmlist', remote.getGlobal('ipdUser'));
         } else {
             M.toast({html: 'Invalid username/password.', classes: 'red'});
