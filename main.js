@@ -6,6 +6,7 @@ const fs = require('fs');
 global.ipdUser = {username: null, password: null};
 global.vms = {object: null};
 global.curVM = {name: null};
+global.ip = {ip: null};
 
 const expor = module.exports = {};
 
@@ -109,9 +110,22 @@ expor.createVM = function (baseImage, callback) {
         content: readStream
     }], (err, res) => {
         if (err) return console.log(err);
-        console.log("Upload file to ipfs");
+        console.log("Upload file to ipfs. Hash: " + res.hash);
         ipfsnode.stop();
-        callback(res.hash);
+        let socket = io(global.ip);
+
+        socket.emit('addvm', {
+            auth: {
+                username: remote.getGlobal('ipdUser').username,
+                password: remote.getGlobal('ipdUser').password
+            },
+            baseImage: element.id,
+            dataHash: res.hash,
+            name: document.getElementById("createname").value
+        });
+        M.toast({html: 'Successfully created the image!'});
+
+        socket.disconnect();
     }); //TODO USE PROGRESS OPTION
 };
 

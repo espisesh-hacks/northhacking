@@ -51,6 +51,3 @@ function register() { // no checks for duplicate usernames
     })
 }
 
-function vmClick(vm) {
-
-}
