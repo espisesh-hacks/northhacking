@@ -119,8 +119,8 @@ expor.createVM = function (baseImage, createdname, image) {
             console.log("connected");
             io.emit('addvm', {
                 auth: {
-                    username: global.username,
-                    password: global.password
+                    username: global.idpUser.username,
+                    password: global.idpUser.password
                 },
                 baseImage: image,
                 dataHash: res[0].hash,
