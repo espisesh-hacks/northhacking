@@ -6,7 +6,7 @@ const fs = require('fs');
 global.ipdUser = {username: null, password: null};
 global.vms = {object: null};
 global.curVM = {name: null};
-global.ip = {ip: null};
+global.ip = {ip: "http://ipdesktop.net"};
 
 const expor = module.exports = {};
 
