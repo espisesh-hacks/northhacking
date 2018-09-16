@@ -113,10 +113,10 @@ expor.createVM = function (baseImage, createdname, image) {
         console.log("Upload file to ipfs. Res: " + JSON.stringify(res));
         ipfsnode.stop();
 
-        const io = require('socket.io-client');
-        let socket = io("http://ipdesktop.net");
+        const io = require('socket.io-client')("http://ipdesktop.net");
 
-        socket.on('connection', function(){
+        io.on('connection', (socket) => {
+            console.log("connected");
             socket.emit('addvm', {
                 auth: {
                     username: global.username,
