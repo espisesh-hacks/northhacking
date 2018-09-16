@@ -99,8 +99,7 @@ ipfsnode.on('start', () => console.log('Node started!'));
 
 expor.createVM = function (baseImage, callback) {
     console.log("Called createVM");
-    let command = "create -f qcow2 -o backing_file=" + baseImage + ".qcow2 ../data.qcow2";
-    require('child_process').execSync("qemu-img create -f qcow2 -o backing_file=../" + baseImage + ".qcow2 ../data.qcow2");
+    require('child_process').execSync("qemu-img create -f qcow2 -o backing_file=" + baseImage + " ../data.qcow2");
     console.log("Executed command qemu-img");
     let readStream = fs.createReadStream('../data.qcow2');
     ipfsnode.start();
