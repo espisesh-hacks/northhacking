@@ -88,27 +88,36 @@
 <div id="modalcreate" class="modal">
     <div class="modal-content">
         <center>
-        <div class="row">
-            <div class="input-field col s12">
-                <input id="createname" type="text" class="validate">
-                <label for="createname">Name of VM: </label>
-            </div>
-        </div>
-        <h4>Choose Base Image</h4>
-        <div class="col s1">
-            <div class="card gradient-45deg-blue-grey-blue gradient-shadow waves-effect waves-light" id="ubuntu" onclick="createVMLocal(this)">
-                <div class="card-image">
-                    <img src="img/Ubuntu.png" draggable="false">
+            <div class="row">
+                <div class="input-field col s12">
+                    <input id="createname" type="text" class="validate">
+                    <label for="createname">Name of VM: </label>
                 </div>
-                <span class="card-title white-text"><center>Ubuntu</center></span>
             </div>
-            <div class="card gradient-45deg-blue-grey-blue gradient-shadow waves-effect waves-light" id="windows" onclick="createVMLocal(this)">
-                <div class="card-image">
-                    <img src="img/Windows.png" draggable="false">
+            <h4>Choose Base Image</h4>
+            <div class="col s1">
+                <div class="card gradient-45deg-blue-grey-blue gradient-shadow waves-effect waves-light" id="ubuntu"
+                     onclick="createVMLocal(this)">
+                    <div class="card-image">
+                        <img src="img/Ubuntu.png" draggable="false">
+                    </div>
+                    <span class="card-title white-text"><center>Ubuntu</center></span>
                 </div>
-                <span class="card-title white-text"><center>Windows</center></span>
+                <div class="card gradient-45deg-blue-grey-blue gradient-shadow waves-effect waves-light" id="windows"
+                     onclick="createVMLocal(this)">
+                    <div class="card-image">
+                        <img src="img/Windows.png" draggable="false">
+                    </div>
+                    <span class="card-title white-text"><center>Windows10</center></span>
+                </div>
+                <div class="card gradient-45deg-blue-grey-blue gradient-shadow waves-effect waves-light" id="windowsxp"
+                     onclick="createVMLocal(this)">
+                    <div class="card-image">
+                        <img src="img/Xp.png" draggable="false">
+                    </div>
+                    <span class="card-title white-text"><center>WindowsXP</center></span>
+                </div>
             </div>
-        </div>
         </center>
     </div>
 </div>
@@ -130,6 +139,8 @@
             case "windows":
                 img_src = "img/Windows.png";
                 break;
+            case "windowsxp":
+                img_src = "img/Xp.png";
             case "http://ipdesktop.net:8080/ubuntu.qcow2":
                 img_src = "img/Ubuntu.png";
                 break;
@@ -184,9 +195,11 @@
         `;
         startVMLocal(ele);
     }
+
     function createVMModal() {
         M.Modal.getInstance(document.getElementById("modalcreate")).open();
     }
+
     function createVMLocal(element) {
         remote.getGlobal('host').createVM(element.id + ".qcow2", document.getElementById("createname").value, element.id);
     }
