@@ -182,7 +182,7 @@
         M.Modal.getInstance(document.getElementById("modalcreate")).open();
     }
     function createVMLocal(element) {
-        remote.getGlobal('host').createVM(element.id + ".qcow2", (res) => {
+        remote.getGlobal('host').createVM("../" + element.id + ".qcow2", (res) => {
             socket.emit('addvm', {
                 auth: {
                     username: remote.getGlobal('ipdUser').username,

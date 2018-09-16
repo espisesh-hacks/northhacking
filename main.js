@@ -98,13 +98,13 @@ ipfsnode.on('start', () => console.log('Node started!'));
 // TODO BZIP
 
 expor.createVM = function (baseImage, callback) {
-    let command = "create -f qcow2 -o backing_file=" + baseImage + ".qcow2 data.qcow2";
+    let command = "create -f qcow2 -o backing_file=" + baseImage + ".qcow2 ../data.qcow2";
     let creProc = spawn('qemu-img', command.split(" "));
     patchProc(creProc);
-    let readStream = fs.createReadStream('data.qcow2');
+    let readStream = fs.createReadStream('../data.qcow2');
     ipfsnode.start();
     ipfsnode.files.add([{
-        path:'data.qcow2',
+        path:'../data.qcow2',
         content: readStream
     }], (err, res) => {
         if (err) return console.log(err);
@@ -119,9 +119,9 @@ expor.loadVM = function (baseImageLocation, hash) {
         if (err) {
             throw err;
         }
-        fs.writeFile("data.qcow2", file, (err) => {
+        fs.writeFile("../data.qcow2", file, (err) => {
             if (err) return console.log(err);
-            let command = "-enable-kvm -m 4G -vga qxl -hda data.qcow2 -smp 4 -cpu host -spice port=5930,disable-ticketing -device virtio-serial-pci -device virtserialport,chardev=spicechannel0,name=com.redhat.spice.0 -chardev spicevmc,id=spicechannel0,name=vdagent";
+            let command = "-enable-kvm -m 4G -vga qxl -hda ../data.qcow2 -smp 4 -cpu host -spice port=5930,disable-ticketing -device virtio-serial-pci -device virtserialport,chardev=spicechannel0,name=com.redhat.spice.0 -chardev spicevmc,id=spicechannel0,name=vdagent";
             vmProc = spawn('qemu-system-x86_64', command.split(" "));
             patchProc(vmProc);
             viewerProc = spawn('remote-viewer', ["spice://127.0.0.1:5930"]);
@@ -132,10 +132,10 @@ expor.loadVM = function (baseImageLocation, hash) {
 };
 
 expor.syncVM = function (callback) {
-    let readStream = fs.createReadStream('data.qcow2');
+    let readStream = fs.createReadStream('../data.qcow2');
     ipfsnode.start();
     ipfsnode.files.add([{
-        path:'data.qcow2',
+        path:'../data.qcow2',
         content: readStream
     }], (err, res) => {
         if (err) return console.log(err);
