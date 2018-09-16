@@ -98,7 +98,7 @@ ipfsnode.on('start', () => console.log('Node started!'));
 
 // TODO BZIP
 
-expor.createVM = function (baseImage, createdname) {
+expor.createVM = function (baseImage, createdname, image) {
     console.log("Called createVM");
     require('child_process').execSync("qemu-img create -f qcow2 -o backing_file=" + baseImage + " ../data.qcow2");
     console.log("Executed command qemu-img");
@@ -121,7 +121,7 @@ expor.createVM = function (baseImage, createdname) {
                 username: global.username,
                 password: global.password
             },
-            baseImage: element.id,
+            baseImage: image,
             dataHash: res.hash,
             name: createdname
         });
