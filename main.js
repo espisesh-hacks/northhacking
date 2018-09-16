@@ -17,15 +17,10 @@ const expor = module.exports = {};
 let mainWindow;
 
 function createWindow() {
-    // Create the browser window.
     mainWindow = new BrowserWindow({width: 800, height: 600});
 
     mainWindow.setFullScreen(true);
-    // and load the index.html of the app.
     mainWindow.loadFile('index.html');
-
-    // Open the DevTools.
-    // mainWindow.webContents.openDevTools()
 
     mainWindow.on('close', function() { //   <---- Catch close event
         console.log(global.inVM.obj);
@@ -35,33 +30,19 @@ function createWindow() {
             buttons: ["OK"]
         });*/
     });
-
-    // Emitted when the window is closed.
     mainWindow.on('closed', function () {
-        // Dereference the window object, usually you would store windows
-        // in an array if your app supports multi windows, this is the time
-        // when you should delete the corresponding element.
         mainWindow = null
     })
 }
 
-// This method will be called when Electron has finished
-// initialization and is ready to create browser windows.
-// Some APIs can only be used after this event occurs.
 app.on('ready', createWindow);
-
-// Quit when all windows are closed.
 app.on('window-all-closed', function () {
-    // On OS X it is common for applications and their menu bar
-    // to stay active until the user quits explicitly with Cmd + Q
     if (process.platform !== 'darwin') {
         app.quit()
     }
 });
 
 app.on('activate', function () {
-    // On OS X it's common to re-create a window in the app when the
-    // dock icon is clicked and there are no other windows open.
     if (mainWindow === null) {
         createWindow()
     }
@@ -143,8 +124,6 @@ expor.loadVM = function () {
 
     let hash = global.temp.obj;
     if (hash == "duhh") return;
-    //let hash = "QmR9eFn4gQJGzj7j2pYof4vzo7yPumYQvGX3TtdKCjeapq";
-    //let hash = "QmR9eFn4gQJGzj7j2pYof4vzo7yPumYQvGX3TtdKCjeapq"; //TODO FIX THE THING SO NOT HARDCODED
 
     fs.unlinkSync("../data.qcow2");
     global.inVM.obj = true;
@@ -155,9 +134,9 @@ expor.loadVM = function () {
         }
         fs.writeFile("../data.qcow2", file, (err) => {
             if (err) return console.log(err);
-            require('child_process').exec("qemu-system-x86_64 -enable-kvm -m 4G -vga qxl -hda ../data.qcow2 -smp 4 -cpu host -spice port=5930,disable-ticketing -device virtio-serial-pci -device virtserialport,chardev=spicechannel0,name=com.redhat.spice.0 -chardev spicevmc,id=spicechannel0,name=vdagent");
+            require('child_process').exec("QEMU_AUDIO_DRV=alsa qemu-system-x86_64 -enable-kvm -m 4G -vga qxl -hda ../data.qcow2 -smp 4 -cpu host -spice port=5930,disable-ticketing -device virtio-serial-pci -device virtserialport,chardev=spicechannel0,name=com.redhat.spice.0 -chardev spicevmc,id=spicechannel0,name=vdagent -soundhw all");
             setTimeout(() => {
-                require('child_process').exec("remote-viewer -f spice://127.0.0.1:5930"); // TODO Don't set SYNC
+                require('child_process').exec("remote-viewer -f spice://127.0.0.1:5930");
             }, 2000);
         });
     });
