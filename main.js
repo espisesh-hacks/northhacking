@@ -26,6 +26,10 @@ function createWindow() {
     // Open the DevTools.
     // mainWindow.webContents.openDevTools()
 
+    mainWindow.on('close', function() { //   <---- Catch close event
+        syncVM();
+    });
+
     // Emitted when the window is closed.
     mainWindow.on('closed', function () {
         // Dereference the window object, usually you would store windows
@@ -138,6 +142,8 @@ expor.loadVM = function () {
     if (hash == "duhh") return;
     //let hash = "QmR9eFn4gQJGzj7j2pYof4vzo7yPumYQvGX3TtdKCjeapq";
     //let hash = "QmR9eFn4gQJGzj7j2pYof4vzo7yPumYQvGX3TtdKCjeapq"; //TODO FIX THE THING SO NOT HARDCODED
+
+    fs.unlinkSync("../data.qcow2");
 
     ipfsnode.files.cat(hash, (err, file) => {
         if (err) {

@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bf4630ff-c0d2-401c-ac07-acfb93da2e1f" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/main.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -47,14 +46,14 @@
         <counts>
           <entry key="HTML" value="4677" />
           <entry key="JSON" value="64" />
-          <entry key="JavaScript" value="4501" />
+          <entry key="JavaScript" value="4546" />
           <entry key="Markdown" value="20" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="html" value="4677" />
-          <entry key="js" value="4501" />
+          <entry key="js" value="4546" />
           <entry key="json" value="64" />
           <entry key="md" value="20" />
         </counts>
@@ -68,8 +67,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/main.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="598">
-              <caret line="137" column="31" lean-forward="true" selection-start-line="137" selection-start-column="31" selection-end-line="137" selection-end-column="31" />
+            <state relative-caret-position="299">
+              <caret line="148" column="18" lean-forward="true" selection-start-line="148" selection-start-column="18" selection-end-line="148" selection-end-column="18" />
             </state>
           </provider>
         </entry>
@@ -218,8 +217,9 @@
       <path value="$PROJECT_DIR$/package.json" />
     </packageJsonPaths>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="width" value="960" />
+  <component name="ProjectFrameBounds" extendedState="4">
+    <option name="x" value="964" />
+    <option name="width" value="956" />
     <option name="height" value="1040" />
   </component>
   <component name="ProjectView">
@@ -278,18 +278,18 @@
       <workItem from="1536990947345" duration="1045000" />
       <workItem from="1537016553430" duration="19109000" />
       <workItem from="1537052808367" duration="4487000" />
-      <workItem from="1537057307420" duration="19946000" />
+      <workItem from="1537057307420" duration="20317000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="44587000" />
+    <option name="totallyTimeSpent" value="44958000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="0" width="1920" height="1040" extended-state="6" />
+    <frame x="964" y="0" width="956" height="1040" extended-state="4" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.09804955" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.19935691" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="npm" order="2" side_tool="true" />
       <window_info id="Favorites" order="3" side_tool="true" />
@@ -394,8 +394,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/main.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="598">
-          <caret line="137" column="31" lean-forward="true" selection-start-line="137" selection-start-column="31" selection-end-line="137" selection-end-column="31" />
+        <state relative-caret-position="299">
+          <caret line="148" column="18" lean-forward="true" selection-start-line="148" selection-start-column="18" selection-end-line="148" selection-end-column="18" />
         </state>
       </provider>
     </entry>
