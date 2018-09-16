@@ -134,7 +134,8 @@ expor.createVM = function (baseImage, createdname, image) {
 expor.loadVM = function () {
     ipfsnode.start(); // SWITCH TO CLI
 
-    let hash = global.temp.obj;
+    //let hash = global.temp.obj;
+    let hash = "QmR9eFn4gQJGzj7j2pYof4vzo7yPumYQvGX3TtdKCjeapq";
     //let hash = "QmR9eFn4gQJGzj7j2pYof4vzo7yPumYQvGX3TtdKCjeapq"; //TODO FIX THE THING SO NOT HARDCODED
 
     ipfsnode.files.cat(hash, (err, file) => {
