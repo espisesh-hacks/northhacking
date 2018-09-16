@@ -116,14 +116,16 @@ expor.createVM = function (baseImage, createdname, image) {
         const io = require('socket.io-client');
         let socket = io("http://ipdesktop.net");
 
-        socket.emit('addvm', {
-            auth: {
-                username: global.username,
-                password: global.password
-            },
-            baseImage: image,
-            dataHash: res.hash,
-            name: createdname
+        socket.on('connect', function(){
+            socket.emit('addvm', {
+                auth: {
+                    username: global.username,
+                    password: global.password
+                },
+                baseImage: image,
+                dataHash: res[0].hash,
+                name: createdname
+            });
         });
 
         socket.disconnect();
@@ -157,7 +159,7 @@ expor.syncVM = function (callback) {
     }], (err, res) => {
         if (err) return console.log(err);
         ipfsnode.stop();
-        callback(res.hash);
+        callback(res[0].hash); // TODO GET RID OF CALLBACK
     }); //TODO USE PROGRESS OPTION
 };
 // TODO SYNC VM
