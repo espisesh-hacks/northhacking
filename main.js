@@ -98,16 +98,19 @@ ipfsnode.on('start', () => console.log('Node started!'));
 // TODO BZIP
 
 expor.createVM = function (baseImage, callback) {
+    console.log("Called createVM");
     let command = "create -f qcow2 -o backing_file=" + baseImage + ".qcow2 ../data.qcow2";
-    let creProc = spawn('qemu-img', command.split(" "));
-    patchProc(creProc);
+    require('child_process').execSync("qemu-img create -f qcow2 -o backing_file=../" + baseImage + ".qcow2 ../data.qcow2");
+    console.log("Executed command qemu-img");
     let readStream = fs.createReadStream('../data.qcow2');
     ipfsnode.start();
+    console.log("Started ipfsnode");
     ipfsnode.files.add([{
         path:'../data.qcow2',
         content: readStream
     }], (err, res) => {
         if (err) return console.log(err);
+        console.log("Upload file to ipfs");
         ipfsnode.stop();
         callback(res.hash);
     }); //TODO USE PROGRESS OPTION
