@@ -30,10 +30,10 @@ function createWindow() {
     mainWindow.on('close', function() { //   <---- Catch close event
         console.log(global.inVM.obj);
         if (global.inVM.obj) expor.syncVM(global.curVM.name);
-        require('dialog').showMessageBox({
+        /*require('dialog').showMessageBox({
             message: "VM is uploading to the blockchain!",
             buttons: ["OK"]
-        });
+        });*/
     });
 
     // Emitted when the window is closed.
