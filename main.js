@@ -28,7 +28,7 @@ function createWindow() {
     // mainWindow.webContents.openDevTools()
 
     mainWindow.on('close', function() { //   <---- Catch close event
-        if (global.inVM.obj) syncVM(global.curVM);
+        if (global.inVM.obj) expor.syncVM(global.curVM.name);
     });
 
     // Emitted when the window is closed.
@@ -189,8 +189,6 @@ expor.syncVM = function (createdname) { //SYNCVM
         });
     });
 };
-
-// TODO SYNC VM
 
 function patchProc(procc) {
     procc.stdout.on('data', (data) => {
