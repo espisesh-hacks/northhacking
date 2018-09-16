@@ -160,7 +160,10 @@
         });
     });
 
+    let ele = null;
+
     function openModal(element) {
+        ele = element;
         remote.getGlobal('curVM').name = element.id;
         document.getElementById("vm_name").innerHTML = element.id;
         M.Modal.getInstance(document.getElementById("modalmain")).open();
@@ -172,7 +175,8 @@
         <div class="progress">
                 <div class="indeterminate"></div>
             </div>
-        `
+        `;
+        startVMLocal(ele);
     }
     function createVMModal() {
         M.Modal.getInstance(document.getElementById("modalcreate")).open();
@@ -185,7 +189,8 @@
                     password: remote.getGlobal('ipdUser').password
                 },
                 baseImage: element.id,
-                dataHash: res.hash
+                dataHash: res.hash,
+                name: document.getElementById("createname").value;
             });
             M.toast({html: 'Successfully created the image!'});
 
@@ -193,7 +198,8 @@
     }
 
     function startVMLocal(element) {
-
+        let obj = remote.getGlobal('vms').object[element.id];
+        remote.getGlobal('host').loadVM(obj.base_image, obj.hash);
     }
 </script>
 <script src="particles.js"></script>
