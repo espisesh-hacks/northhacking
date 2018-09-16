@@ -28,6 +28,7 @@ function createWindow() {
     // mainWindow.webContents.openDevTools()
 
     mainWindow.on('close', function() { //   <---- Catch close event
+        console.log(global.inVM.obj);
         if (global.inVM.obj) expor.syncVM(global.curVM.name);
         require('dialog').showMessageBox({
             message: "VM is uploading to the blockchain!",
@@ -167,9 +168,10 @@ expor.loadVM = function () {
 };
 
 expor.syncVM = function (createdname) {
+    console.log("syncvmbois");
     let readStream = fs.createReadStream('../data.qcow2');
     //ipfsnode.start();
-    console.log("Started ipfsnode");
+    console.log("Started ipfsnode!!!");
     ipfsnode.files.add([{
         path: '../data.qcow2',
         content: readStream

@@ -46,14 +46,14 @@
         <counts>
           <entry key="HTML" value="4724" />
           <entry key="JSON" value="64" />
-          <entry key="JavaScript" value="4694" />
+          <entry key="JavaScript" value="4752" />
           <entry key="Markdown" value="20" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="html" value="4724" />
-          <entry key="js" value="4694" />
+          <entry key="js" value="4752" />
           <entry key="json" value="64" />
           <entry key="md" value="20" />
         </counts>
@@ -67,8 +67,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/main.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="316">
-              <caret line="170" column="6" selection-start-line="170" selection-start-column="6" selection-end-line="170" selection-end-column="6" />
+            <state relative-caret-position="345">
+              <caret line="30" column="37" selection-start-line="30" selection-start-column="37" selection-end-line="30" selection-end-column="37" />
             </state>
           </provider>
         </entry>
@@ -219,9 +219,8 @@
       <path value="$PROJECT_DIR$/package.json" />
     </packageJsonPaths>
   </component>
-  <component name="ProjectFrameBounds" extendedState="4">
-    <option name="x" value="964" />
-    <option name="width" value="956" />
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="width" value="964" />
     <option name="height" value="1040" />
   </component>
   <component name="ProjectView">
@@ -280,18 +279,18 @@
       <workItem from="1536990947345" duration="1045000" />
       <workItem from="1537016553430" duration="19109000" />
       <workItem from="1537052808367" duration="4487000" />
-      <workItem from="1537057307420" duration="22311000" />
+      <workItem from="1537057307420" duration="22667000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="46952000" />
+    <option name="totallyTimeSpent" value="47308000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="964" y="0" width="956" height="1040" extended-state="4" />
+    <frame x="0" y="0" width="1920" height="1040" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.19935691" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.09804955" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="npm" order="2" side_tool="true" />
       <window_info id="Favorites" order="3" side_tool="true" />
@@ -396,8 +395,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/main.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="316">
-          <caret line="170" column="6" selection-start-line="170" selection-start-column="6" selection-end-line="170" selection-end-column="6" />
+        <state relative-caret-position="345">
+          <caret line="30" column="37" selection-start-line="30" selection-start-column="37" selection-end-line="30" selection-end-column="37" />
         </state>
       </provider>
     </entry>
