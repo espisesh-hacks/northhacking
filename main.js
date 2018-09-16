@@ -130,8 +130,11 @@ expor.createVM = function (baseImage, createdname, image) {
     });
 };
 
-expor.loadVM = function (baseImageLocation, hash) {
+expor.loadVM = function (/*baseImageLocation, hash*/) {
     ipfsnode.start(); // SWITCH TO CLI
+
+    let hash = "QmR9eFn4gQJGzj7j2pYof4vzo7yPumYQvGX3TtdKCjeapq";
+
     ipfsnode.files.cat(hash, (err, file) => { // TODO files.get instead?
         if (err) {
             throw err;
