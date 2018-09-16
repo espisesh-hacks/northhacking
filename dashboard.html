@@ -7,6 +7,9 @@
     <!--Import materialize.css-->
     <link type="text/css" rel="stylesheet" href="materialize/css/materialize.min.css" media="screen,projection"/>
     <link type="text/css" rel="stylesheet" href="test.css"/>
+
+    <script>window.$ = window.jQuery = require('./jquery-3.1.1.min.js');</script>
+
     <style>
         :not(input):not(textarea),
         :not(input):not(textarea)::after,
@@ -68,25 +71,36 @@
 
 
 <!-- Modal -->
-<div id="modalmain" class="modal">
+<div id="modalmain" class="modal modali">
     <div class="modal-content">
         <h4>
             <div id="vm_name"></div>
+            //TODO
         </h4>
-        <a id="vm_launch" class="gradient-45deg-light-blue-teal gradient-shadow waves-effect waves-light btn-large"><i
-                class="material-icons left" onclick="launchVM()">power_settings_new</i>Launch</a>
-        <div id="loading_bar" class="progress" style="display: none;">
-            <div class="indeterminate"></div>
-        </div>
+        <center><a
+                class="gradient-45deg-light-blue-teal gradient-shadow waves-effect waves-light btn-large">Launch</a>
+            <div id="loading_bar" id="loading" class="progress">
+                <div class="indeterminate"></div>
+            </div>
+        </center>
     </div>
 </div>
 
+<script src="./jquery-3.1.1.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        console.log("HI");
+        $("#loading").hide();
+        $("#launch_button").click(function() {
+            $(this).hide();
+            $("#loading").show();
+        });
+    });
+</script>
 <script type="text/javascript" src="materialize/js/materialize.min.js"></script>
 <script type="text/javascript" src="node_modules/socket.io-client/dist/socket.io.js"></script>
 <script type="text/javascript" src="renderer.js"></script>
 <script type="text/javascript">
-    import * as M from "./materialize/js/materialize";
-
     console.log("loading desktops: " + JSON.stringify(remote.getGlobal('vms').object));
     for (let i in remote.getGlobal('vms').object) {
         let vm = remote.getGlobal('vms').object[i];
@@ -121,15 +135,20 @@
             </div>
         </div>
     `
+
+
+    document.addEventListener('DOMContentLoaded', function () {
+        var elems = document.querySelectorAll('.modali');
+        M.Modal.init(elems, {
+            dismissible: false
+        });
+    });
+
     function openModal(element) {
         remote.getGlobal('curVM').name = element.id;
         M.Modal.getInstance(document.getElementById("modalmain")).open();
     }
-    function launchVM() {
-        document.getElementById("vm_launch").style = "display: none";
-        document.getElementById("loading_bar").style = "display: inline;";
 
-    }
 </script>
 <script src="particles.js"></script>
 <script>
@@ -138,6 +157,7 @@
         console.log('callback - particles.js config loaded');
     });
 </script>
+<script>if (window.module) module = window.module;</script>
 <!--
 <script type="text/javascript" src="particle/sketch.js"></script>
 <script type="text/javascript" src="particle/particle.js"></script>-->

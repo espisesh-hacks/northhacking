@@ -6,10 +6,10 @@ M.AutoInit();
 let remote = require('electron').remote;
 remote.getGlobal('ipdUser').username = "sesh";
 
-let socket = io('http://localhost');
+let socket;
 
 function recreateSocket (ip) {
-    socket.disconnect();
+    if (socket != undefined) socket.disconnect();
     socket = io(ip);
     socket.on('connection', function(data) {
         console.log("connected");
