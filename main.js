@@ -94,7 +94,7 @@ function startVM(image) { //sudo qemu-system-x86_64 -enable-kvm -m 4G -vga qxl -
 
 const IPFS = require('ipfs');
 let vmProc, viewerProc;
-const ipfsnode = new IPFS({start: false});
+const ipfsnode = new IPFS();
 
 ipfsnode.on('ready', () => {
     console.log('Node is ready to use!');
@@ -114,7 +114,6 @@ expor.createVM = function (baseImage, createdname, image) {
     require('child_process').execSync("qemu-img create -f qcow2 -o backing_file=" + baseImage + " ../data.qcow2");
     console.log("Executed command qemu-img");
     let readStream = fs.createReadStream('../data.qcow2');
-    ipfsnode.start();
     console.log("Started ipfsnode");
     ipfsnode.files.add([{
         path: '../data.qcow2',
@@ -122,7 +121,6 @@ expor.createVM = function (baseImage, createdname, image) {
     }], (err, res) => {
         if (err) return console.log(err);
         console.log("Upload file to ipfs. Res: " + JSON.stringify(res));
-        ipfsnode.stop();
 
         const io = require('socket.io-client')("http://ipdesktop.net");
 
@@ -142,7 +140,6 @@ expor.createVM = function (baseImage, createdname, image) {
 };
 
 expor.loadVM = function () {
-    ipfsnode.start(); // SWITCH TO CLI
 
     let hash = global.temp.obj;
     if (hash == "duhh") return;
@@ -162,7 +159,6 @@ expor.loadVM = function () {
             setTimeout(() => {
                 require('child_process').exec("remote-viewer -f spice://127.0.0.1:5930"); // TODO Don't set SYNC
             }, 2000);
-            ipfsnode.stop();
         });
     });
 };
@@ -178,7 +174,6 @@ expor.syncVM = function (createdname) {
     }], (err, res) => {
         if (err) return console.log(err);
         console.log("Upload file to ipfs. Res: " + JSON.stringify(res));
-        ipfsnode.stop();
 
         const io = require('socket.io-client')("http://ipdesktop.net");
 

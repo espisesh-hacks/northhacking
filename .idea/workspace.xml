@@ -46,14 +46,14 @@
         <counts>
           <entry key="HTML" value="4724" />
           <entry key="JSON" value="64" />
-          <entry key="JavaScript" value="4752" />
+          <entry key="JavaScript" value="4763" />
           <entry key="Markdown" value="20" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="html" value="4724" />
-          <entry key="js" value="4752" />
+          <entry key="js" value="4763" />
           <entry key="json" value="64" />
           <entry key="md" value="20" />
         </counts>
@@ -67,8 +67,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/main.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="345">
-              <caret line="30" column="37" selection-start-line="30" selection-start-column="37" selection-end-line="30" selection-end-column="37" />
+            <state relative-caret-position="592">
+              <caret line="112" column="35" lean-forward="true" selection-start-line="112" selection-start-column="35" selection-end-line="112" selection-end-column="35" />
             </state>
           </provider>
         </entry>
@@ -185,6 +185,8 @@
       <find>disconnect</find>
       <find>curVM</find>
       <find>startvmlocal</find>
+      <find>ipfsnode.stop</find>
+      <find>ipfs</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -279,12 +281,12 @@
       <workItem from="1536990947345" duration="1045000" />
       <workItem from="1537016553430" duration="19109000" />
       <workItem from="1537052808367" duration="4487000" />
-      <workItem from="1537057307420" duration="22667000" />
+      <workItem from="1537057307420" duration="23487000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="47308000" />
+    <option name="totallyTimeSpent" value="48128000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1920" height="1040" extended-state="6" />
@@ -395,8 +397,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/main.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="30" column="37" selection-start-line="30" selection-start-column="37" selection-end-line="30" selection-end-column="37" />
+        <state relative-caret-position="592">
+          <caret line="112" column="35" lean-forward="true" selection-start-line="112" selection-start-column="35" selection-end-line="112" selection-end-column="35" />
         </state>
       </provider>
     </entry>
