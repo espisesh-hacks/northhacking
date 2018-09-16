@@ -119,15 +119,15 @@ expor.createVM = function (baseImage, createdname, image) {
             console.log("connected");
             io.emit('addvm', {
                 auth: {
-                    username: global.idpUser.username,
-                    password: global.idpUser.password
+                    username: global.ipdUser.username,
+                    password: global.ipdUser.password
                 },
                 baseImage: image,
                 dataHash: res[0].hash,
                 name: createdname
             });
         });
-    }); //TODO USE PROGRESS OPTION
+    });
 };
 
 expor.loadVM = function (baseImageLocation, hash) {
