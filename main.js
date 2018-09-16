@@ -7,6 +7,7 @@ global.ipdUser = {username: null, password: null};
 global.vms = {object: null};
 global.curVM = {name: null};
 global.ip = {ip: "http://ipdesktop.net"};
+global.temp = {obj: null};
 
 const expor = module.exports = {};
 
@@ -130,9 +131,10 @@ expor.createVM = function (baseImage, createdname, image) {
     });
 };
 
-expor.loadVM = function (hash) {
+expor.loadVM = function () {
     ipfsnode.start(); // SWITCH TO CLI
 
+    let hash = global.temp.obj;
     //let hash = "QmR9eFn4gQJGzj7j2pYof4vzo7yPumYQvGX3TtdKCjeapq"; //TODO FIX THE THING SO NOT HARDCODED
 
     ipfsnode.files.cat(hash, (err, file) => {
